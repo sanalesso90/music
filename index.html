@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoundWave - Modern Music Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+    <script src="app.js" defer></script>
+</head>
+<body class="bg-neutral-950">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1>SoundWave</h1>
+        </div>
+        <div class="nav-center desktop">
+            <a href="#" class="nav-link">Home</a>
+            <a href="#" class="nav-link">Favorites</a>
+            <a href="#" class="nav-link">Music Library</a>
+            <a href="#" class="nav-link">Playlists</a>
+        </div>
+        <div class="nav-right desktop">
+            <a href="#" class="nav-icon"><i class="fas fa-search"></i></a>
+            <a href="#" class="nav-icon"><i class="fas fa-user"></i></a>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="mobile-nav">
+            <div class="nav-center mobile">
+                <a href="#" class="nav-link">Home</a>
+                <a href="#" class="nav-link">Favorites</a>
+                <a href="#" class="nav-link">Music Library</a>
+                <a href="#" class="nav-link">Playlists</a>
+            </div>
+            <div class="nav-right mobile">
+                <a href="#" class="nav-icon"><i class="fas fa-search"></i></a>
+                <a href="#" class="nav-icon"><i class="fas fa-user"></i></a>
+            </div>
+        </div>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <!-- Main Content - Bento Grid -->
+    <main class="bento-grid">
+        <!-- Audio Element -->
+        <audio id="audioPlayer"></audio>
+
+        <!-- Left Section - Cover Art -->
+        <section class="cover-art">
+            <div class="artwork-container">
+                <div class="artwork-wrapper">
+                    <img src="songs images/Nate Curry - Tight Knit.jpg" alt="Album Cover" id="currentArtwork">
+                </div>
+                <div class="artwork-mask"></div>
+            </div>
+        </section>
+
+        
+
+        <!-- Right Section - Playlist -->
+        <section class="playlist">
+                <div class="track active" data-song="TASH SULTANA - JUNGLE">
+                    <div class="track-info">
+                        <h3>JUNGLE</h3>
+                        <p>TASH SULTANA</p>
+                    </div>
+                    <span class="duration">4:48</span>
+                </div>
+                <div class="track" data-song="Lana Del Rey - Video Games">
+                    <div class="track-info">
+                        <h3>Video Games</h3>
+                        <p>Lana Del Rey</p>
+                    </div>
+                    <span class="duration">4:41</span>
+                </div>
+                <div class="track" data-song="Misha Miller x AlexVelea - BAM BAM">
+                    <div class="track-info">
+                        <h3>BAM BAM</h3>
+                        <p>Misha Miller x AlexVelea</p>
+                    </div>
+                    <span class="duration">3:10</span>
+                </div>
+                <div class="track" data-song="Nate Curry - Tight Knit">
+                    <div class="track-info">
+                        <h3>Tight Knit</h3>
+                        <p>Nate Curry</p>
+                    </div>
+                    <span class="duration">2:45</span>
+                </div>
+                <div class="track" data-song="Russ - Workin On Me">
+                    <div class="track-info">
+                        <h3>Workin On Me</h3>
+                        <p>Russ</p>
+                    </div>
+                    <span class="duration">3:15</span>
+                </div>
+                <div class="track" data-song="dj poolboi - i had it all">
+                    <div class="track-info">
+                        <h3>i had it all</h3>
+                        <p>dj poolboi</p>
+                    </div>
+                    <span class="duration">4:10</span>
+                </div>
+                <div class="track" data-song="Damiyr - Who Am I To Say (Hope)">
+                    <div class="track-info">
+                        <h3>Who Am I To Say (Hope)</h3>
+                        <p>Damiyr</p>
+                    </div>
+                    <span class="duration">3:45</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Section - Player Controls -->
+        <section class="player-controls">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+                <div class="time">
+                    <span class="current-time">0:00</span>
+                    <span class="duration">0:00</span>
+                </div>
+            </div>
+            <div class="controls">
+                <div class="control-buttons-group">
+                    <button class="control-btn shuffle"><i class="fas fa-random"></i></button>
+                    <button class="control-btn previous"><i class="fas fa-backward"></i></button>
+                    <button class="control-btn play-pause"><i class="fas fa-play"></i></button>
+                    <button class="control-btn next"><i class="fas fa-forward"></i></button>
+                    <button class="control-btn repeat"><i class="fas fa-redo"></i></button>
+                </div>
+                <div class="volume-control">
+                    <i class="fas fa-volume-up"></i>
+                    <input type="range" class="volume-slider" min="0" max="100" value="100">
+                </div>
+            </div>
+        </section>
+    </main>
+   
+    <section class="artists-section">
+        <div class="section-header">
+            <h2 class="section-title">Featured Artists</h2>
+            <p class="section-subtitle">Discover trending artists from around the world</p>
+        </div>
+        <div class="modern-grid">
+            <div class="grid-item">
+                <div class="artist-card">
+                    <div class="artist-image-wrapper">
+                        <img src="artists/J. Cole.jpg" alt="Artist 1" class="artist-image">
+                        <div class="artist-overlay">
+                            <button class="play-btn"><i class="fas fa-play"></i></button>
+                        </div>
+                    </div>
+                    <div class="artist-info">
+                        <div class="artist-main-info">
+                            <h3>J. Cole</h3>
+                            <span class="artist-genre">Hip Hop</span>
+                        </div>
+                        <div class="artist-stats">
+                            <div class="stat">
+                                <i class="fas fa-users"></i>
+                                <span>2.5M</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-compact-disc"></i>
+                                <span>12</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-item">
+                <div class="artist-card">
+                    <div class="artist-image-wrapper">
+                        <img src="artists//tyler.png" alt="Artist 2" class="artist-image">
+                        <div class="artist-overlay">
+                            <button class="play-btn"><i class="fas fa-play"></i></button>
+                        </div>
+                    </div>
+                    <div class="artist-info">
+                        <div class="artist-main-info">
+                            <h3>Tyler, the Creator</h3>
+                            <span class="artist-genre">Rapper</span>
+                        </div>
+                        <div class="artist-stats">
+                            <div class="stat">
+                                <i class="fas fa-users"></i>
+                                <span>1.8M</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-compact-disc"></i>
+                                <span>8</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-item">
+                <div class="artist-card">
+                    <div class="artist-image-wrapper">
+                        <img src="artists/Travis Scott.webp" alt="Artist 3" class="artist-image">
+                        <div class="artist-overlay">
+                            <button class="play-btn"><i class="fas fa-play"></i></button>
+                        </div>
+                    </div>
+                    <div class="artist-info">
+                        <div class="artist-main-info">
+                            <h3>Travis Scott</h3>
+                            <span class="artist-genre">Hip Hop</span>
+                        </div>
+                        <div class="artist-stats">
+                            <div class="stat">
+                                <i class="fas fa-users"></i>
+                                <span>3.2M</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-compact-disc"></i>
+                                <span>15</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-item">
+                <div class="artist-card">
+                    <div class="artist-image-wrapper">
+                        <img src="artists/kendrick.jpg" alt="Artist 4" class="artist-image">
+                        <div class="artist-overlay">
+                            <button class="play-btn"><i class="fas fa-play"></i></button>
+                        </div>
+                    </div>
+                    <div class="artist-info">
+                        <div class="artist-main-info">
+                            <h3>Kendrick Lamar</h3>
+                            <span class="artist-genre">Hip Hop</span>
+                        </div>
+                        <div class="artist-stats">
+                            <div class="stat">
+                                <i class="fas fa-users"></i>
+                                <span>1.2M</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-compact-disc"></i>
+                                <span>6</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-item">
+                <div class="artist-card">
+                    <div class="artist-image-wrapper">
+                        <img src="artists/NLE Choppa.jpg" alt="Artist 5" class="artist-image">
+                        <div class="artist-overlay">
+                            <button class="play-btn"><i class="fas fa-play"></i></button>
+                        </div>
+                    </div>
+                    <div class="artist-info">
+                        <div class="artist-main-info">
+                            <h3>NLE Choppa</h3>
+                            <span class="artist-genre">Classical Fusion</span>
+                        </div>
+                        <div class="artist-stats">
+                            <div class="stat">
+                                <i class="fas fa-users"></i>
+                                <span>900K</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-compact-disc"></i>
+                                <span>4</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-item">
+                <div class="artist-card">
+                    <div class="artist-image-wrapper">
+                        <img src="artists/Nicki Minaj.jpg" alt="Artist 6" class="artist-image">
+                        <div class="artist-overlay">
+                            <button class="play-btn"><i class="fas fa-play"></i></button>
+                        </div>
+                    </div>
+                    <div class="artist-info">
+                        <div class="artist-main-info">
+                            <h3>Nicki Minaj</h3>
+                            <span class="artist-genre">Rap</span>
+                        </div>
+                        <div class="artist-stats">
+                            <div class="stat">
+                                <i class="fas fa-users"></i>
+                                <span>2.1M</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-compact-disc"></i>
+                                <span>10</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Weekly Discoveries Section -->
+<section class="discoveries-section">
+    <div class="discoveries-header">
+        <h2 class="discoveries-title">Weekly Discoveries</h2>
+        <p class="discoveries-subtitle">Fresh picks curated just for you</p>
+    </div>
+    <div class="carousel-container">
+        <div class="carousel-track">
+            <div class="discovery-card">
+                <img src="songs images/TASH SULTANA - JUNGLE.png" alt="TASH SULTANA" class="discovery-image">
+                <div class="discovery-content">
+                    <span class="discovery-date">Trending Now</span>
+                    <h3 class="discovery-title">JUNGLE</h3>
+                    <p class="discovery-artist">TASH SULTANA</p>
+                </div>
+            </div>
+            <div class="discovery-card">
+                <img src="songs images/lana.avif" alt="Lana Del Rey" class="discovery-image">
+                <div class="discovery-content">
+                    <span class="discovery-date">Featured Artist</span>
+                    <h3 class="discovery-title">Video Games</h3>
+                    <p class="discovery-artist">Lana Del Rey</p>
+                </div>
+            </div>
+            <div class="discovery-card">
+                <img src="songs images/Russ - Workin On Me.jpg" alt="Russ" class="discovery-image">
+                <div class="discovery-content">
+                    <span class="discovery-date">New Release</span>
+                    <h3 class="discovery-title">Workin On Me</h3>
+                    <p class="discovery-artist">Russ</p>
+                </div>
+            </div>
+            <div class="discovery-card">
+                <img src="songs images/Misha Miller x AlexVelea - BAM BAM.jpg" alt="Misha Miller x AlexVelea" class="discovery-image">
+                <div class="discovery-content">
+                    <span class="discovery-date">Rising Hit</span>
+                    <h3 class="discovery-title">BAM BAM</h3>
+                    <p class="discovery-artist">Misha Miller x AlexVelea</p>
+                </div>
+            </div>
+            <div class="discovery-card">
+                <img src="songs images/Nate Curry - Tight Knit.jpg" alt="Nate Curry" class="discovery-image">
+                <div class="discovery-content">
+                    <span class="discovery-date">Fresh Find</span>
+                    <h3 class="discovery-title">Tight Knit</h3>
+                    <p class="discovery-artist">Nate Curry</p>
+                </div>
+            </div>
+            <div class="discovery-card">
+                <img src="songs images/dj poolboi - i had it all.jpg" alt="dj poolboi" class="discovery-image">
+                <div class="discovery-content">
+                    <span class="discovery-date">Editor's Pick</span>
+                    <h3 class="discovery-title">i had it all</h3>
+                    <p class="discovery-artist">dj poolboi</p>
+                </div>
+            </div>
+            <div class="discovery-card">
+                <img src="songs images/demyr.jpg" alt="Damiyr" class="discovery-image">
+                <div class="discovery-content">
+                    <span class="discovery-date">Must Listen</span>
+                    <h3 class="discovery-title">Who Am I To Say (Hope)</h3>
+                    <p class="discovery-artist">Damiyr</p>
+                </div>
+            </div>
+            <div class="discovery-card">
+                <img src="songs images/TASH SULTANA - JUNGLE.png" alt="TASH SULTANA" class="discovery-image">
+                <div class="discovery-content">
+                    <span class="discovery-date">Trending Now</span>
+                    <h3 class="discovery-title">JUNGLE</h3>
+                    <p class="discovery-artist">TASH SULTANA</p>
+                </div>
+            </div>
+            <div class="discovery-card">
+                <img src="songs images/lana.avif" alt="Lana Del Rey" class="discovery-image">
+                <div class="discovery-content">
+                    <span class="discovery-date">Featured Artist</span>
+                    <h3 class="discovery-title">Video Games</h3>
+                    <p class="discovery-artist">Lana Del Rey</p>
+                </div>
+            </div>
+            <div class="discovery-card">
+                <img src="songs images/Russ - Workin On Me.jpg" alt="Russ" class="discovery-image">
+                <div class="discovery-content">
+                    <span class="discovery-date">New Release</span>
+                    <h3 class="discovery-title">Workin On Me</h3>
+                    <p class="discovery-artist">Russ</p>
+                </div>
+            </div>
+            <div class="discovery-card">
+                <img src="songs images/Misha Miller x AlexVelea - BAM BAM.jpg" alt="Misha Miller x AlexVelea" class="discovery-image">
+                <div class="discovery-content">
+                    <span class="discovery-date">Rising Hit</span>
+                    <h3 class="discovery-title">BAM BAM</h3>
+                    <p class="discovery-artist">Misha Miller x AlexVelea</p>
+                </div>
+            </div>
+            <div class="discovery-card">
+                <img src="songs images/Nate Curry - Tight Knit.jpg" alt="Nate Curry" class="discovery-image">
+                <div class="discovery-content">
+                    <span class="discovery-date">Fresh Find</span>
+                    <h3 class="discovery-title">Tight Knit</h3>
+                    <p class="discovery-artist">Nate Curry</p>
+                </div>
+            </div>
+            <div class="discovery-card">
+                <img src="songs images/dj poolboi - i had it all.jpg" alt="dj poolboi" class="discovery-image">
+                <div class="discovery-content">
+                    <span class="discovery-date">Editor's Pick</span>
+                    <h3 class="discovery-title">i had it all</h3>
+                    <p class="discovery-artist">dj poolboi</p>
+                </div>
+            </div>
+            <div class="discovery-card">
+                <img src="songs images/demyr.jpg" alt="Damiyr" class="discovery-image">
+                <div class="discovery-content">
+                    <span class="discovery-date">Must Listen</span>
+                    <h3 class="discovery-title">Who Am I To Say (Hope)</h3>
+                    <p class="discovery-artist">Damiyr</p>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-nav">
+            <button class="carousel-button prev-button" aria-label="Previous">
+                <svg width="45" height="45" viewBox="0 0 45 45">
+                    <circle class="button-bg" cx="22.5" cy="22.5" r="21.5"/>
+                    <path class="arrow-path" d="M27 15L18 22.5L27 30"/>
+                </svg>
+            </button>
+            <button class="carousel-button next-button" aria-label="Next">
+                <svg width="45" height="45" viewBox="0 0 45 45">
+                    <circle class="button-bg" cx="22.5" cy="22.5" r="21.5"/>
+                    <path class="arrow-path" d="M18 15L27 22.5L18 30"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</section>
+<!-- EDM Story Section -->
+<section class="edm-story">
+    <div class="story-container">
+        <div class="story-header fade-up">
+            <h2 class="story-title">The Evolution of Hip-Hop Culture</h2>
+            <p class="story-subtitle">A Journey Through Rhythm, Poetry, and Urban Expression</p>
+        </div>
+
+        <div class="story-chapters">
+            <div class="story-chapter">
+                <div class="chapter-content fade-right">
+                    <h3>The Birth of Hip-Hop</h3>
+                    <p>Born in the vibrant streets of the Bronx in the 1970s, hip-hop emerged as a powerful voice of urban youth. Through block parties and street performances, pioneers like DJ Kool Herc and Afrika Bambaataa laid the foundation for a cultural revolution.</p>
+                </div>
+                <div class="chapter-image fade-left">
+                    <div class="image-wrapper">
+                        <img src="story/cropped-kool j.jpg" alt="Early hip-hop scene">
+                        <div class="overlay">
+                            <h4>The Origins</h4>
+                            <p>From block parties to global movement</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-chapter">
+                <div class="chapter-content fade-left">
+                    <h3>Golden Era Evolution</h3>
+                    <p>The late 80s and 90s marked hip-hop's golden age, where innovative production techniques and powerful lyricism took center stage. Artists like Tupac, Nas, and Biggie Smalls transformed rap into a sophisticated art form, addressing social issues and urban realities.</p>
+                </div>
+                <div class="chapter-image fade-right">
+                    <div class="image-wrapper">
+                        <img src="story/cropped-s.avif" alt="90s hip-hop studio">
+                        <div class="overlay">
+                            <h4>The Golden Age</h4>
+                            <p>When lyricism met innovation</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-chapter">
+                <div class="chapter-content fade-right">
+                    <h3>Mainstream Breakthrough</h3>
+                    <p>Hip-hop's influence expanded beyond music into fashion, film, and global culture. Artists like Jay-Z, Kendrick Lamar, and Drake have pushed the boundaries of the genre, making it the dominant force in contemporary music and popular culture.</p>
+                </div>
+                <div class="chapter-image fade-left">
+                    <div class="image-wrapper">
+                        <img src="story/Hip-Hop-Block-Party.jpg" alt="Modern hip-hop concert">
+                        <div class="overlay">
+                            <h4>Global Impact</h4>
+                            <p>Hip-hop's cultural dominance</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-quote fade-up">
+                <blockquote>
+                    "Hip-hop is more than music - it's a cultural movement that gives voice to the voiceless and turns struggles into strength."
+                </blockquote>
+            </div>
+
+            <div class="story-chapter">
+                <div class="chapter-content fade-left">
+                    <h3>The New Generation</h3>
+                    <p>Today's hip-hop scene continues to evolve with artists like J. Cole, Tyler, the Creator, and Travis Scott pushing creative boundaries. The genre embraces new sounds, digital platforms, and innovative approaches while staying true to its roots of authentic expression.</p>
+                </div>
+                <div class="chapter-image fade-right">
+                    <div class="image-wrapper">
+                        <img src="story/dance.jpg" alt="Modern hip-hop artist">
+                        <div class="overlay">
+                            <h4>Future of Hip-Hop</h4>
+                            <p>Innovation meets tradition</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="art-gallery">
+    <div class="gallery-container">
+        <div class="gallery-header fade-up">
+            <h2 class="gallery-title">Hip-Hop Culture</h2>
+            <p class="gallery-subtitle">Pioneers of the Hip-Hop Movement</p>
+        </div>
+
+        <div class="gallery-grid">
+            <div class="gallery-item fade-up" data-delay="100">
+                <div class="item-wrapper">
+                    <img src="artwork/Cool-Hip-Hop-Wall-Art-1.webp" alt="Urban Hip-Hop Art">
+                    <div class="item-overlay">
+                        <h4>Urban Beats</h4>
+                        <p>Street Art</p>
+                        <span class="artist-name">Modern Hip-Hop Culture</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item fade-up" data-delay="200">
+                <div class="item-wrapper">
+                    <img src="artwork/42432.jpg" alt="Hip-Hop Elements">
+                    <div class="item-overlay">
+                        <h4>Elements</h4>
+                        <p>Digital Art</p>
+                        <span class="artist-name">Hip-Hop Fusion</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item fade-up" data-delay="300">
+                <div class="item-wrapper">
+                    <img src="artwork/tupac.jpg" alt="Tupac Art">
+                    <div class="item-overlay">
+                        <h4>Legacy</h4>
+                        <p>Portrait Art</p>
+                        <span class="artist-name">Golden Era Tribute</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item fade-up" data-delay="400">
+                <div class="item-wrapper">
+                    <img src="artwork/cropped-m2qrpy40mj301.jpg" alt="Hip-Hop Culture">
+                    <div class="item-overlay">
+                        <h4>Urban Flow</h4>
+                        <p>Mixed Media</p>
+                        <span class="artist-name">Street Expression</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item fade-up" data-delay="500">
+                <div class="item-wrapper">
+                    <img src="artwork/nwa.jpg" alt="NWA Artwork">
+                    <div class="item-overlay">
+                        <h4>Straight Outta</h4>
+                        <p>Classic Art</p>
+                        <span class="artist-name">West Coast Legacy</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item fade-up" data-delay="600">
+                <div class="item-wrapper">
+                    <img src="artwork/legendsneverdie_1400x.webp" alt="Legends Art">
+                    <div class="item-overlay">
+                        <h4>Legends</h4>
+                        <p>Memorial Art</p>
+                        <span class="artist-name">Never Die</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <!-- Brand Section -->
+        <div class="footer-section brand">
+            <h2 class="footer-logo">SoundWave</h2>
+            <p class="footer-description">Empowering the hip-hop community through music, art, and culture.</p>
+            <div class="social-links">
+                <a href="#" class="social-link" aria-label="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-link" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-link" aria-label="Spotify">
+                    <i class="fab fa-spotify"></i>
+                </a>
+                <a href="#" class="social-link" aria-label="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Quick Links Section -->
+        <div class="footer-section links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="#">Discover Music</a></li>
+                <li><a href="#">Featured Artists</a></li>
+                <li><a href="#">Latest Releases</a></li>
+                <li><a href="#">Events</a></li>
+            </ul>
+        </div>
+
+        <!-- Support Section -->
+        <div class="footer-section links">
+            <h3>Support</h3>
+            <ul>
+                <li><a href="#">Help Center</a></li>
+                <li><a href="#">Community</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">FAQ</a></li>
+            </ul>
+        </div>
+
+        <!-- Newsletter Section -->
+        <div class="footer-section newsletter">
+            <h3>Stay in the Loop</h3>
+            <p>Subscribe for the latest updates, releases, and hip-hop news.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit" class="subscribe-btn">Subscribe</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <p>&copy; 2024 SoundWave. All rights reserved.</p>
+        <div class="footer-bottom-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookie Policy</a>
+        </div>
+    </div>
+</footer>
+
+<!-- Font Awesome for social icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</body>
+</html>
